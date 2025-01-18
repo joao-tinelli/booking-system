@@ -43,7 +43,14 @@ void insert(Node **root, int code, int priority);
  * @param **root
  * @return maxpriority
  */
-int extractMax(Node** root);
+int extractMax(Node **root);
+
+/**
+ * @brief Function to remove a node (reservation) given its priority
+ * @param *root, priority
+ * @return root
+ */
+Node *findAndRemoveByPriority(Node *root, int priority);
 
 /**
  * @brief Function to print the tree (heap) in-order

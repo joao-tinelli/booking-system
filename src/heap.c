@@ -131,6 +131,61 @@ int extractMax(Node** root)
     return maxpriority;
 }
 
+Node *findAndRemoveByPriority(Node* root, int priority)
+{
+    if (root == NULL) {
+        printf("The heap is empty or the node does not exist.\n");
+        return NULL;
+    }
+
+    // If the root has the matching priority
+    if (root->priority == priority) {
+        extractMax(&root);  // Reuse extractMax to handle the removal and restructuring
+        return root;
+    }
+
+    // Perform level-order traversal to find the node with the matching priority
+    Node* queue[100];
+    int front = 0, rear = 0;
+    queue[rear++] = root;
+
+    while (front < rear) {
+        Node* current = queue[front++];
+
+        // Check the left child
+        if (current->left) {
+            if (current->left->priority == priority) {
+                Node* temp = current->left;
+
+                // Replace the node to be removed with the last node
+                extractMax(&temp);  // Reuse extractMax to remove and restore the heap
+                current->left = NULL;
+                return root;
+            } else {
+                queue[rear++] = current->left;
+            }
+        }
+
+        // Check the right child
+        if (current->right) {
+            if (current->right->priority == priority) {
+                Node* temp = current->right;
+
+                // Replace the node to be removed with the last node
+                extractMax(&temp);  // Reuse extractMax to remove and restore the heap
+                current->right = NULL;
+                return root;
+            } else {
+                queue[rear++] = current->right;
+            }
+        }
+    }
+
+    printf("Node with priority %d not found.\n", priority);
+    return root;
+}
+
+
 // Função para imprimir a árvore em ordem
 void printInOrder(Node* root)
 {
