@@ -6,77 +6,77 @@ typedef struct _node NodeHash;
 typedef struct ListHash;
 
 /**
- * @brief Função para inicializar a lista de cada elemento da tabela hash.
+ * @brief Function to initialize the list of each element in the hash table.
  * @param *list
  * @return (void)
  */
-void inicializeList(ListHash *list);
+void initializeList(ListHash *list);
 
 /**
- * @brief Função para inserir na lista de uma posição específica da tabela hash.
+ * @brief Function to insert into the list of a specific position in the hash table.
  * @param *list, code, *status
  * @return (void)
  */
 void insertIntoList(ListHash *list, unsigned int code, char *status);
 
 /**
- * @brief Função para atualizar o status de uma sala dentro de uma lista de uma posição específica da tabela hash.
+ * @brief Function to update the status of a room within a list of a specific position in the hash table.
  * @param *list, code, *newStatus
  * @return (void)
  */
 void updateRoomStatus(ListHash *list, unsigned int code, char *newStatus);
 
 /**
- * @brief Função para buscar o status de uma sala dentro de uma lista de uma posição específica da tabela hash.
+ * @brief Function to search for the status of a room within a list of a specific position in the hash table.
  * @param *list, code
  * @return status
  */
 char *searchList(ListHash *list, unsigned int code);
 
 /**
- * @brief Função para imprimir a lista de uma posição específica da tabela hash.
+ * @brief Function to print the list of a specific position in the hash table.
  * @param *list
  * @return (void)
  */
 void printList(ListHash *list);
 
 /**
- * @brief Função para inicializar a tabela hash.
+ * @brief Function to initialize the hash table.
  * @param t[], size
  * @return (void)
  */
-void inicializeHashTable(ListHash t[], unsigned int size);
+void initializeHashTable(ListHash t[], unsigned int size);
 
 /**
- * @brief Função para gerar a posição na tabela hash.
+ * @brief Function to generate the position in the hash table.
  * @param code, size
  * @return id
  */
 int hashFunction(unsigned int code, unsigned int size);
 
 /**
- * @brief Função para inserir na tabela hash.
+ * @brief Function to insert into the hash table.
  * @param t[], code, *status, size
  * @return (void)
  */
 void insertIntoHashTable(ListHash t[], unsigned int code, char *status, unsigned int size);
 
 /**
- * @brief Função para atualizar o status de uma sala na tabela hash.
- * @param t[], code, *status, size
+ * @brief Function to update the status of a room in the hash table.
+ * @param t[], code, *newStatus, size
  * @return (void)
  */
 void updateStatusIntoHashTable(ListHash t[], unsigned int code, char *newStatus, unsigned int size);
 
 /**
- * @brief Função para buscar o status de uma sala dentro da tabela hash.
+ * @brief Function to search for the status of a room within the hash table.
  * @param t[], code, size
  * @return *status
  */
 char *searchStatusIntoHashTable(ListHash t[], unsigned int code, unsigned int size);
 
 /**
- * @brief Função para imprimir a tabela hash.
+ * @brief Function to print the hash table.
  * @param t[], size
  * @return (void)
  */
