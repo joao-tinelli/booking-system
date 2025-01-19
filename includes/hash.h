@@ -3,7 +3,7 @@
 
 typedef struct _node NodeHash;
 
-typedef struct ListHash;
+typedef struct _listhash ListHash;
 
 /**
  * @brief Function to initialize the list of each element in the hash table.
@@ -45,7 +45,7 @@ void printList(ListHash *list);
  * @param t[], size
  * @return (void)
  */
-void initializeHashTable(ListHash t[], unsigned int size);
+void initializeHashTable(ListHash *t, unsigned int size);
 
 /**
  * @brief Function to generate the position in the hash table.
@@ -59,27 +59,27 @@ int hashFunction(unsigned int code, unsigned int size);
  * @param t[], code, *status, size
  * @return (void)
  */
-void insertIntoHashTable(ListHash t[], unsigned int code, char *status, unsigned int size);
+void insertIntoHashTable(ListHash *t, unsigned int code, char *status, unsigned int size);
 
 /**
  * @brief Function to update the status of a room in the hash table.
  * @param t[], code, *newStatus, size
  * @return (void)
  */
-void updateStatusIntoHashTable(ListHash t[], unsigned int code, char *newStatus, unsigned int size);
+void updateStatusIntoHashTable(ListHash *t, unsigned int code, char *newStatus, unsigned int size);
 
 /**
  * @brief Function to search for the status of a room within the hash table.
  * @param t[], code, size
  * @return *status
  */
-char *searchStatusIntoHashTable(ListHash t[], unsigned int code, unsigned int size);
+char *searchStatusIntoHashTable(ListHash *t, unsigned int code, unsigned int size);
 
 /**
  * @brief Function to print the hash table.
  * @param t[], size
  * @return (void)
  */
-void printHashTable(ListHash t[], const unsigned int size);
+void printHashTable(ListHash *t, const unsigned int size);
 
 #endif

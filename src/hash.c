@@ -9,7 +9,7 @@ typedef struct _node {
     struct _node *next;
 } NodeHash;
 
-typedef struct {
+typedef struct _listhash {
     NodeHash *start;
     unsigned int tam;
 } ListHash;
@@ -68,7 +68,7 @@ void printList(ListHash *list) {
     printf("NULL");
 }
 
-void inicializeHashTable(ListHash t[], unsigned int size) {
+void initializeHashTable(ListHash *t, unsigned int size) {
     for (int i = 0; i < size; i++) {
         inicializeList(&t[i]);
     }
@@ -78,23 +78,23 @@ int hashFunction(unsigned int code, unsigned int size) {
     return code % size;
 }
 
-void insertIntoHashTable(ListHash t[], unsigned int code, char *status, unsigned int size) {
+void insertIntoHashTable(ListHash *t, unsigned int code, char *status, unsigned int size) {
     int id = hashFunction(code, size);
     insertIntoList(&t[id], code, status);
 }
 
-void updateStatusIntoHashTable(ListHash t[], unsigned int code, char *newStatus, unsigned int size) {
+void updateStatusIntoHashTable(ListHash *t, unsigned int code, char *newStatus, unsigned int size) {
     int id = hashFunction(code, size);
     updateRoomStatus(&t[id], code, newStatus);
 }
 
-char *searchStatusIntoHashTable(ListHash t[], unsigned int code, unsigned int size) {
+char *searchStatusIntoHashTable(ListHash *t, unsigned int code, unsigned int size) {
     int id = hashFunction(code, size);
     printf("-> Indice gerado: %d.\n", id);
     return searchList(&t[id], code);
 }
 
-void printHashTable(ListHash t[], const unsigned int size) {
+void printHashTable(ListHash *t, const unsigned int size) {
     for (int i = 0; i < size; i++) {
         printf("%d = ", i);
         printList(&t[i]);

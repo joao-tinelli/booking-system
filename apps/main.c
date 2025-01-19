@@ -14,7 +14,7 @@ int main()
     if (file == NULL)
     {
         perror("Error opening file.\n");
-        return;
+        return 0;
     }
 
     // Reading the input file
@@ -37,7 +37,7 @@ int main()
         } else if (strcmp(line_file, "CONSULTAR_SALA") == 0){
 
         } else {
-            
+
         }
     }
     // Closing the file
