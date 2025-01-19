@@ -48,13 +48,15 @@ int main()
             room_priority = findPriorityByCode(root_heap, room_code);
             findAndRemoveByPriority(root_heap, room_priority);     // Removendo a reserva
 
-
         } else if (strcmp(line_file, "LISTAR_SALAS") == 0){
+            puts("Printing the rooms:");                        // Listando as salas (AVL)
+            showAVLTree(root_avl, 0);
 
         } else if (strcmp(line_file, "CONSULTAR_SALA") == 0){
-
+            sscanf(line_file, "%*s %d", &room_code); 
+                                                                // **Imprimir o estado da sala na hash
         } else {
-
+            perror("Problem reading the line...");
         }
     }
     // Closing the file

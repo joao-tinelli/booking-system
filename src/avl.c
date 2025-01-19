@@ -199,7 +199,7 @@ void showAVLTree(NodeAVL *root, int level) {
         showAVLTree(root->right, level + 1);
         printf("\n\n");
 
-        for (int  i = 0; i < level; i++)
+        for (int i = 0; i < level; i++)
             printf("\t");
         
         printf("%d", root->code);
