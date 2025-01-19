@@ -6,6 +6,10 @@
 
 int main()
 {
+    NodeAVL *root_avl = NULL;
+    NodeHeap *root_heap = NULL;
+
+
     FILE *file = fopen("./input/input-1.txt", "r");
 
     char line_file[100], line_name[20];
@@ -22,17 +26,28 @@ int main()
     {
         sscanf(line_file, "%s", line_name);
 
-        if (strcmp(line_name, "CRIAR_SALA") == 0){
-
-
-        } else if (strcmp(line_file, "RESERVAR_SALA") == 0){
+        if (strcmp(line_name, "CRIAR_SALA") == 0) {
             sscanf(line_file, "%*s %d %d", &room_code, &room_capacity);
+            root_avl = insertRoom(root_avl, room_code, room_capacity); // Cria a sala na AVL
+                                                                       // **Joga na hash como 'disponivel'  
+
+        } else if (strcmp(line_file, "RESERVAR_SALA") == 0) {
+            sscanf(line_file, "%*s %d %d", &room_code, &room_priority); 
+            insert(&root_heap, room_code, room_priority);              // Cria a reserva no Heap
             
-        } else if (strcmp(line_file, "BLOQUEAR_SALA") == 0){
+        } else if (strcmp(line_file, "BLOQUEAR_SALA") == 0) {
+            sscanf(line_file, "%*s %d", &room_code); 
+                                                                    // **Joga na hash como 'ocupada'
+                                                                       
+        } else if (strcmp(line_file, "DESBLOQUEAR_SALA") == 0) {
+            sscanf(line_file, "%*s %d", &room_code); 
+                                                                   // **Joga na hash como 'disponivel' 
 
-        } else if (strcmp(line_file, "DESBLOQUEAR_SALA") == 0){
+        } else if (strcmp(line_file, "CANCELAR_RESERVA") == 0) {
+            sscanf(line_file, "%*s %d", &room_code);
+            room_priority = findPriorityByCode(root_heap, room_code);
+            findAndRemoveByPriority(root_heap, room_priority);     // Removendo a reserva
 
-        } else if (strcmp(line_file, "CANCELAR_RESERVA") == 0){
 
         } else if (strcmp(line_file, "LISTAR_SALAS") == 0){
 

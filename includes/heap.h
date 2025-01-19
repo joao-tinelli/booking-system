@@ -59,4 +59,11 @@ NodeHeap *findAndRemoveByPriority(NodeHeap *root, int priority);
  */
 void printInOrder(NodeHeap* root);
 
+/**
+ * @brief Function to get a room's priority based on its code the tree (heap) in-order
+ * @param *root, code
+ * @return priority
+ */
+int findPriorityByCode(NodeHeap *root, int code);
+
 #endif

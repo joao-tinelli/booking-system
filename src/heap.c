@@ -196,6 +196,33 @@ void printInOrder(NodeHeap* root)
     printInOrder(root->right);
 }
 
+int findPriorityByCode(NodeHeap *root, int code) {
+    if (root == NULL) {
+        printf("The heap is empty.\n");
+        return -1; // Return an invalid priority to indicate the node was not found
+    }
+
+    // Perform level-order traversal to search for the node with the given code
+    NodeHeap* queue[100];
+    int front = 0, rear = 0;
+    queue[rear++] = root;
+
+    while (front < rear) {
+        NodeHeap* current = queue[front++];
+
+        if (current->code == code) {
+            return current->priority; // Return the priority if the code matches
+        }
+
+        if (current->left) queue[rear++] = current->left;
+        if (current->right) queue[rear++] = current->right;
+    }
+
+    printf("Node with code %d not found.\n", code);
+    return -1; // Return an invalid priority if the node is not found
+}
+
+
 
 
 
