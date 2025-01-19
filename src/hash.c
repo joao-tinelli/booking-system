@@ -29,7 +29,7 @@ void insertIntoList(ListHash *list, unsigned int code, char *status) {
         list->start = node;
         list->tam++;
     } else {
-        perror("Error: Problema ao inserir na lista!\n");
+        perror("Error: Failed to insert in the list!\n");
     }
 }
 
@@ -42,9 +42,9 @@ void updateRoomStatus(ListHash *list, unsigned int code, char *newStatus) {
 
     if (aux) {
         strcpy(aux->status, newStatus);
-        printf("\nSuccess: Status da sala %d atualizado!\n", code);
+        printf("\nSuccess: Room with code '%d' updated!\n", code);
     } else {
-        printf("\nERROR: Sala com código %d não encontrada!\n", code);
+        printf("\nERROR: Room with code '%d' not found\n", code);
     }
 }
 
