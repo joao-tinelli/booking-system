@@ -179,6 +179,20 @@ Node *removeRoom(Node *root, unsigned int code) {
     
 }
 
+Node *searchNode(Node *root, unsigned int code) {
+    // If the tree is empty or the root's code matches the search
+    if (root == NULL || root->code == code)
+        return root;
+
+    // If the code to search is smaller, search the left subtree
+    if (code < root->code)
+        return searchNode(root->left, code);
+
+    // If the code to search is larger, search the right subtree
+    return searchNode(root->right, code);
+}
+
+
 void showAVLTree(Node *root, int level) {
     if (root) {
         showAVLTree(root->right, level + 1);

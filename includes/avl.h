@@ -88,6 +88,13 @@ Node *insertRoom(Node *root, unsigned int code, unsigned int capacity);
 Node *removeRoom(Node *root, unsigned int code);
 
 /**
+ * @brief Function to search a node (room) by its code
+ * @param *root, code
+ * @return NULL or Node
+ */
+Node *searchNode(Node *root, unsigned int code);
+
+/**
  * @brief Funcao para mostrar a arvore avl
  * @param *root, level
  * @return void
