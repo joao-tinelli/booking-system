@@ -1,7 +1,7 @@
 #ifndef H_HEAP
 #define H_HEAP
 
-typedef struct Node Node;
+typedef struct _node Node;
 
 /**
  * @brief Function to create a new node

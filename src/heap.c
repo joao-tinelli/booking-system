@@ -1,10 +1,10 @@
 #include "heap.h"
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct Node {
+typedef struct _node {
     int code, priority;
-    struct Node *left;
-    struct Node *right;
+    struct _node *left;
+    struct _node *right;
 } Node;
 
 Node *createNode(int code, int priority)
@@ -24,7 +24,7 @@ void swap(int *a, int *b)
     *b = temp;
 }
 
-void maxHeapify(Node* root)
+void maxHeapify(Node *root)
 {
     if (root == NULL)
         return;
@@ -88,7 +88,7 @@ void insert(Node **root, int code, int priority)
 int extractMax(Node** root)
 {
     if (*root == NULL) {
-        printf("Heap vazio!\n");
+        printf("Empty heap!\n");
         return -1;
     }
     int maxpriority = (*root)->priority;
@@ -103,7 +103,6 @@ int extractMax(Node** root)
     }
     if (lastNode) {
         (*root)->priority = lastNode->priority;
-        Node* parent = NULL;
         front = 0;
         rear = 0;
         queue[rear++] = *root;
