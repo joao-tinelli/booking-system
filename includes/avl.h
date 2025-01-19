@@ -4,102 +4,94 @@
 typedef struct _node Node;
 
 /**
- * @brief Funcao de criacao de um novo no
+ * @brief Function to create a new node
  * @param code, capacity
  * @return *node
  */
 Node *newNode(unsigned int code, unsigned int capacity);
 
 /**
- * @brief Retorna o maior codigo
+ * @brief Returns the larger value between two codes
  * @param a, b
- * @return a ou b
+ * @return a or b
  */
 short bigger(short a, short b);
 
 /**
- * @brief Retorna a altura de um no ou -1, caso ele seja Null
+ * @brief Returns the height of a node or -1 if it is NULL
  * @param *node
- * @return short (height);
+ * @return short (height)
  */
 short nodeHeight(Node *node);
 
 /**
- * @brief Calcula o fator de balanceamento
+ * @brief Calculates the balancing factor
  * @param *node
- * @return short (fator de balanceamento)
+ * @return short (balancing factor)
  */
 short balancingFactor(Node *node);
 
 /**
- * @brief Funcao para realizar a rotacao a esquerda;
+ * @brief Function to perform a left rotation
  * @param *root
- * @return y (nova root)
+ * @return y (new root)
  */
 Node *leftRotation(Node *root);
 
 /**
- * @brief Funcao para realizar a rotacao a direita
+ * @brief Function to perform a right rotation
  * @param *root
- * @return y (nova root)
+ * @return y (new root)
  */
 Node *rightRotation(Node *root);
 
 /**
- * @brief Funcao para realizar a rotacao dupla (esquerda - direita)
+ * @brief Function to perform a double rotation (left - right)
  * @param *root
- * @return rotacao a esquerdaa e a direita
+ * @return result of left and right rotations
  */
-Node* leftAndRightRotation(Node *root);
+Node *leftAndRightRotation(Node *root);
 
 /**
- * @brief Funcao para realizar a rotacao dupla (esquerda - direita)
+ * @brief Function to perform a double rotation (right - left)
  * @param *root
- * @return rotacao a esquerdaa e a direita
+ * @return result of right and left rotations
  */
-Node* leftAndRightRotation(Node *root);
+Node *rightAndLeftRotation(Node *root);
 
 /**
- * @brief Funcao para realizar a rotacao dupla (direita - esquerda)
- * @param *root
- * @return rotacao a esquerda e a direita
- */
-Node* rightAndLeftRotation(Node *root);
-
-/**
- * @brief Funcao para realizar o balanceamento apos uma insercao ou remocao
+ * @brief Function to balance the tree after an insertion or removal
  * @param *root
  * @return *root
  */
 Node *balance(Node *root);
 
 /**
- * @brief Insere um novo nó na arvore
+ * @brief Inserts a new node into the tree
  * @param *root, code, capacity
  * @return *root
  */
 Node *insertRoom(Node *root, unsigned int code, unsigned int capacity);
 
 /**
- * @brief Funcao para remover um no da arvore
+ * @brief Function to remove a node from the tree
  * @param *root, code
  * @return *root
  */
 Node *removeRoom(Node *root, unsigned int code);
 
 /**
- * @brief Function to search a node (room) by its code
+ * @brief Function to search for a node (room) by its code
  * @param *root, code
  * @return NULL or Node
  */
 Node *searchNode(Node *root, unsigned int code);
 
 /**
- * @brief Funcao para mostrar a arvore avl
+ * @brief Function to display the AVL tree
  * @param *root, level
  * @return void
  */
 void showAVLTree(Node *root, int level);
-
 
 #endif

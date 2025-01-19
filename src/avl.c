@@ -100,7 +100,7 @@ Node *balance(Node *root) {
     return root;
 }
 
-Node *inseinsertRoomt(Node *root, unsigned int code, unsigned int capacity) {
+Node *insertRoom(Node *root, unsigned int code, unsigned int capacity) {
     // arvore vazia
     if (root == NULL) 
         return newNode(code, capacity);
