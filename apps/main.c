@@ -9,7 +9,7 @@ int main()
     FILE *file = fopen("./input/input-1.txt", "r");
 
     char line_file[100], line_name[20];
-    int n1, n2;
+    int room_code, room_capacity, room_priority;
 
     if (file == NULL)
     {
@@ -24,8 +24,10 @@ int main()
 
         if (strcmp(line_name, "CRIAR_SALA") == 0){
 
-        } else if (strcmp(line_file, "RESERVAR_SALA") == 0){
 
+        } else if (strcmp(line_file, "RESERVAR_SALA") == 0){
+            sscanf(line_file, "%*s %d %d", &room_code, &room_capacity);
+            
         } else if (strcmp(line_file, "BLOQUEAR_SALA") == 0){
 
         } else if (strcmp(line_file, "DESBLOQUEAR_SALA") == 0){

@@ -2,47 +2,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct _node {
+typedef struct _nodeAVL {
     unsigned int code, capacity;
-    struct _node *left, *right;
-    short height;
-} Node;
+    struct _nodeAVL *left;
+    struct _nodeAVL *right;
+    short int height;
+} NodeAVL;
 
-Node *newNode(unsigned int code, unsigned int capacity) {
-    Node *node = (Node*) malloc(sizeof(Node));
+NodeAVL *newNodeAVL(unsigned int code, unsigned int capacity) {
+    NodeAVL *new = (NodeAVL*) malloc(sizeof(NodeAVL));
 
-    if (node) {
-        node->code = code;
-        node->capacity = capacity;
-        node->left = node->right = NULL;
-        node->height = 0;
+    if (new) {
+        new->code = code;
+        new->capacity = capacity;
+        new->left = new->right = NULL;
+        new->height = 0;
     }
     else 
         perror("\nERRO ao alocar no em 'noNovo()'");
     
-    return node;
+    return new;
 }
 
 short bigger(short a, short b) {
     return (a > b) ? a : b;
 }
 
-short nodeHeight(Node *node) {
-    if (node == NULL) 
+short NodeAVLHeight(NodeAVL *NodeAVL) {
+    if (NodeAVL == NULL) 
         return -1;
     else 
-        return node->height;
+        return NodeAVL->height;
 }
 
-short balancingFactor(Node *node) {
-    if (node)
-        return (nodeHeight(node->left)) - (nodeHeight(node->right));
+short balancingFactor(NodeAVL *NodeAVL) {
+    if (NodeAVL)
+        return (NodeAVLHeight(NodeAVL->left)) - (NodeAVLHeight(NodeAVL->right));
     else    
         return 0;
 }
 
-Node *leftRotation(Node *root) {
-    Node *y, *f; //f -> FILHO
+NodeAVL *leftRotation(NodeAVL *root) {
+    NodeAVL *y, *f; //f -> FILHO
 
     y = root->right;
     f = y->left;
@@ -50,14 +51,14 @@ Node *leftRotation(Node *root) {
     y->left = root;
     root->right = f; //f se torna o filho a direita de r (caso tenha)
 
-    root->height = bigger(nodeHeight(root->left), nodeHeight(root->right)) + 1;
-    y->height = bigger(nodeHeight(y->left), nodeHeight(y->right)) + 1;
+    root->height = bigger(NodeAVLHeight(root->left), NodeAVLHeight(root->right)) + 1;
+    y->height = bigger(NodeAVLHeight(y->left), NodeAVLHeight(y->right)) + 1;
 
     return y;
 } 
 
-Node *rightRotation(Node *root) {
-    Node *y, *f; // f -> filho
+NodeAVL *rightRotation(NodeAVL *root) {
+    NodeAVL *y, *f; // f -> filho
 
     y = root->left;
     f = y->right;
@@ -65,23 +66,23 @@ Node *rightRotation(Node *root) {
     y->right = root;
     root->left = f; //f se torna o filho a esquerdo de r (caso tenha)
 
-    root->height = bigger(nodeHeight(root->left), nodeHeight(root->right)) + 1;
-    y->height = bigger(nodeHeight(y->left), nodeHeight(y->right)) + 1;
+    root->height = bigger(NodeAVLHeight(root->left), NodeAVLHeight(root->right)) + 1;
+    y->height = bigger(NodeAVLHeight(y->left), NodeAVLHeight(y->right)) + 1;
 
     return y;
 } 
 
-Node* leftAndRightRotation(Node *root) {
+NodeAVL* leftAndRightRotation(NodeAVL *root) {
     root->left = leftRotation(root->left);
     return rightRotation(root);
 }
 
-Node* rightAndLeftRotation(Node *root) {
+NodeAVL* rightAndLeftRotation(NodeAVL *root) {
     root->right = rightRotation(root->right);
     return leftRotation(root);
 }
 
-Node *balance(Node *root) {
+NodeAVL *balance(NodeAVL *root) {
     short fb = balancingFactor(root);
 
     // rotacao a esquerda
@@ -100,10 +101,10 @@ Node *balance(Node *root) {
     return root;
 }
 
-Node *insertRoom(Node *root, unsigned int code, unsigned int capacity) {
+NodeAVL *insertRoom(NodeAVL *root, unsigned int code, unsigned int capacity) {
     // arvore vazia
     if (root == NULL) 
-        return newNode(code, capacity);
+        return newNodeAVL(code, capacity);
     // insercao sera para a esquerda ou direita
     else {
         if (code < root->code)
@@ -115,7 +116,7 @@ Node *insertRoom(Node *root, unsigned int code, unsigned int capacity) {
     }
 
     // Recalcula a altura de todos os nos entre a root e o novo no inserido
-    root->height = bigger(nodeHeight(root->left), nodeHeight(root->right)) + 1;
+    root->height = bigger(NodeAVLHeight(root->left), NodeAVLHeight(root->right)) + 1;
 
     // verifica a necessidade de balancear a arvore
     root = balance(root);
@@ -123,7 +124,7 @@ Node *insertRoom(Node *root, unsigned int code, unsigned int capacity) {
     return root;
 }
 
-Node *removeRoom(Node *root, unsigned int code) {
+NodeAVL *removeRoom(NodeAVL *root, unsigned int code) {
     if (root == NULL) {
         perror("code nao encontrado!\n");
         return NULL;
@@ -140,7 +141,7 @@ Node *removeRoom(Node *root, unsigned int code) {
             else {
                 // remover no que possi 2 filhos
                 if (root->left != NULL && root->right != NULL) {
-                    Node *aux = root->left;
+                    NodeAVL *aux = root->left;
                     while (aux->right != NULL)
                         aux = aux->right;
                     root->code = aux->code;
@@ -151,7 +152,7 @@ Node *removeRoom(Node *root, unsigned int code) {
                 }
                 else {
                     // remover nos que possuem apenas 1 filho
-                    Node *aux;
+                    NodeAVL *aux;
                     if (root->left != NULL)
                         aux = root->left;
                     else 
@@ -169,7 +170,7 @@ Node *removeRoom(Node *root, unsigned int code) {
         }
 
         // Recalcula a altura de todos os nos entre a root e o novo no inserido
-        root->height = bigger(nodeHeight(root->left), nodeHeight(root->right)) + 1;
+        root->height = bigger(NodeAVLHeight(root->left), NodeAVLHeight(root->right)) + 1;
 
         // verifica a necessidade de balancear a arvore
         root = balance(root);
@@ -179,21 +180,21 @@ Node *removeRoom(Node *root, unsigned int code) {
     
 }
 
-Node *searchNode(Node *root, unsigned int code) {
+NodeAVL *searchNodeAVL(NodeAVL *root, unsigned int code) {
     // If the tree is empty or the root's code matches the search
     if (root == NULL || root->code == code)
         return root;
 
     // If the code to search is smaller, search the left subtree
     if (code < root->code)
-        return searchNode(root->left, code);
+        return searchNodeAVL(root->left, code);
 
     // If the code to search is larger, search the right subtree
-    return searchNode(root->right, code);
+    return searchNodeAVL(root->right, code);
 }
 
 
-void showAVLTree(Node *root, int level) {
+void showAVLTree(NodeAVL *root, int level) {
     if (root) {
         showAVLTree(root->right, level + 1);
         printf("\n\n");

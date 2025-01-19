@@ -1,14 +1,14 @@
 #ifndef H_HEAP
 #define H_HEAP
 
-typedef struct _node Node;
+typedef struct _nodeHeap NodeHeap;
 
 /**
- * @brief Function to create a new node
+ * @brief Function to create a new NodeHeap
  * @param code, priority
- * @return *node
+ * @return *NodeHeap
  */
-Node *createNode(int code, int priority);
+NodeHeap *createNodeHeap(int code, int priority);
 
 /**
  * @brief Function to swap two values
@@ -22,41 +22,41 @@ void swap(int *a, int *b);
  * @param *root
  * @return void
  */
-void maxHeapify(Node* root);
+void maxHeapify(NodeHeap* root);
 
 /**
  * @brief Auxiliary function to insert in level
- * @param *root, *newNode
+ * @param *root, *newNodeHeap
  * @return void
  */
-void insertLevelOrder(Node *root, Node *newNode);
+void insertLevelOrder(NodeHeap *root, NodeHeap *newNodeHeap);
 
 /**
- * @brief Function to insert a node (reservation) into the heap
+ * @brief Function to insert a NodeHeap (reservation) into the heap
  * @param **root, code, priority
  * @return void
  */
-void insert(Node **root, int code, int priority);
+void insert(NodeHeap **root, int code, int priority);
 
 /**
  * @brief Function to remove the highest element (root) of the heap
  * @param **root
  * @return maxpriority
  */
-int extractMax(Node **root);
+int extractMax(NodeHeap **root);
 
 /**
- * @brief Function to remove a node (reservation) given its priority
+ * @brief Function to remove a NodeHeap (reservation) given its priority
  * @param *root, priority
  * @return root
  */
-Node *findAndRemoveByPriority(Node *root, int priority);
+NodeHeap *findAndRemoveByPriority(NodeHeap *root, int priority);
 
 /**
  * @brief Function to print the tree (heap) in-order
  * @param *root
  * @return void
  */
-void printInOrder(Node* root);
+void printInOrder(NodeHeap* root);
 
 #endif
