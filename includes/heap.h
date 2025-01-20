@@ -11,11 +11,11 @@ typedef struct _nodeHeap NodeHeap;
 NodeHeap *createNodeHeap(int code, int priority);
 
 /**
- * @brief Function to swap two values
+ * @brief Function to swap two Nodes
  * @param *a, *b
  * @return void
  */
-void swap(int *a, int *b);
+void swapNodes(NodeHeap *a, NodeHeap *b);
 
 /**
  * @brief Function to restore the heap's property (Max-Heapify)

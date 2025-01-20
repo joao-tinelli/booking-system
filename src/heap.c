@@ -17,12 +17,18 @@ NodeHeap *createNodeHeap(int code, int priority)
     return newNodeHeap;
 }
 
-void swap(int *a, int *b)
+void swapNodes(NodeHeap *a, NodeHeap *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+    int tempCode = a->code;
+    int tempPriority = a->priority;
+
+    a->code = b->code;
+    a->priority = b->priority;
+
+    b->code = tempCode;
+    b->priority = tempPriority;
 }
+
 
 void maxHeapify(NodeHeap *root)
 {
@@ -35,10 +41,11 @@ void maxHeapify(NodeHeap *root)
         largest = root->right;
     if (largest != root)
     {
-        swap(&root->priority, &largest->priority);
+        swapNodes(root, largest);
         maxHeapify(largest);
     }
 }
+
 
 void insertLevelOrder(NodeHeap *root, NodeHeap *newNodeHeap)
 {
@@ -184,15 +191,13 @@ NodeHeap *findAndRemoveByPriority(NodeHeap* root, int priority)
     return root;
 }
 
-
-// Função para imprimir a árvore em ordem
 void printInOrder(NodeHeap* root)
 {
     if (root == NULL)
         return;
         
     printInOrder(root->left);
-    printf("%d ", root->priority);
+    printf("ROOM --- CODE: '%d' --- PRIORITY: '%d'\n", root->code, root->priority);
     printInOrder(root->right);
 }
 
