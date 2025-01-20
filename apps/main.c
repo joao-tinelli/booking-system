@@ -13,7 +13,7 @@ int main()
     FILE *file = fopen("./input/input-1.txt", "r");
 
     char line_file[100], line_name[20];
-    int room_code, room_capacity, room_priority;
+    int room_code, room_capacity, room_priority, new_priority;
 
     if (file == NULL)
     {
@@ -55,12 +55,21 @@ int main()
         } else if (strcmp(line_file, "CONSULTAR_SALA") == 0){
             sscanf(line_file, "%*s %d", &room_code); 
                                                                 // **Imprimir o estado da sala na hash
+        } else if (strcmp(line_file, "ATUALIZAR_PRIORIDADE") == 0) {
+            sscanf(line_file, "%*s %d %d", &room_code, &new_priority); 
+            room_priority = findPriorityByCode(root_heap, room_code);
+            findAndRemoveByPriority(root_heap, room_priority);   
+            insert(&root_heap, room_code, new_priority);         // Substituindo a prioridade da reserva 
+
         } else {
             perror("Problem reading the line...");
         }
     }
     // Closing the file
     fclose(file);
+
+    puts("AVL:");
+    showAVLTree(root_avl, 0);
 
     return 0;
 }
