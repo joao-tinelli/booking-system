@@ -88,10 +88,10 @@ NodeAVL *removeRoom(NodeAVL *root, unsigned int code);
 NodeAVL *searchNodeAVL(NodeAVL *root, unsigned int code);
 
 /**
- * @brief Function to display the AVL tree
- * @param *root, level
+ * @brief Function to display the AVL tree (rooms)
+ * @param *root
  * @return void
  */
-void showAVLTree(NodeAVL *root, int level);
+void showAVLTree(NodeAVL *root);
 
 #endif

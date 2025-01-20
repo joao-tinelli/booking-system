@@ -29,7 +29,6 @@ int main()
             sscanf(line_file, "%*s %d %d", &room_code, &room_capacity);
             root_avl = insertRoom(root_avl, room_code, room_capacity); // Cria a sala na AVL
                                                                   // **Joga na hash como 'disponivel'  
-
         } else if (strcmp(line_name, "RESERVAR_SALA") == 0) {
             sscanf(line_file, "%*s %d %d", &room_code, &room_priority); 
             insert(&root_heap, room_code, room_priority);              // Cria a reserva no Heap
@@ -43,18 +42,14 @@ int main()
                                                                    // **Joga na hash como 'disponivel' 
         } else if (strcmp(line_name, "CANCELAR_RESERVA") == 0) {
             sscanf(line_file, "%*s %d", &room_code);
-            
-            room_priority = findPriorityByCode(root_heap, room_code);
-            printf("A prioridade da sala %d eh %d\n", room_code, room_priority);
-
+            room_priority = findPriorityByCode(root_heap, room_code);            
             findAndRemoveByPriority(root_heap, room_priority);     // Removendo a reserva
-            puts("agora temos as reservas:");
-            printInOrder(root_heap);
+            
             
         } else if (strcmp(line_name, "LISTAR_SALAS") == 0){
-            //puts("Printing the rooms:");                        // Listando as salas (AVL)
-            //showAVLTree(root_avl, 0);
-                                                                    // **Joga na hash como 'disponivel'  
+            puts("Available rooms:");                        // Listando as salas (AVL)
+            showAVLTree(root_avl); 
+            puts("");                                                     // **Joga na hash como 'disponivel'  
 
         } else if (strcmp(line_name, "CONSULTAR_SALA") == 0){
             sscanf(line_file, "%*s %d", &room_code); 
@@ -74,11 +69,12 @@ int main()
     // Closing the file
     fclose(file);
 
-    //puts("AVL:");
-    //showAVLTree(root_avl, 0);
+    puts("AVL (Rooms):");
+    showAVLTree(root_avl);
+    puts("");
 
-    //puts("HEAP:");
-    //printInOrder(root_heap);
+    puts("HEAP (Reservations):");
+    printInOrder(root_heap);
 
     return 0;
 }
