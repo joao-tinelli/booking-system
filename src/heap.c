@@ -46,7 +46,6 @@ void maxHeapify(NodeHeap *root)
     }
 }
 
-
 void insertLevelOrder(NodeHeap *root, NodeHeap *newNodeHeap)
 {
     NodeHeap* queue[100];
@@ -91,25 +90,32 @@ void insert(NodeHeap **root, int code, int priority)
     }
 }
 
-// Função para remover o maior elemento (raiz) do Heap
-int extractMax(NodeHeap** root)
+int extractMax(NodeHeap **root)
 {
     if (*root == NULL) {
         printf("Empty heap!\n");
         return -1;
     }
-    int maxpriority = (*root)->priority;
+    int maxPriority = (*root)->priority; // Save the max priority to return later
+
     NodeHeap* queue[100];
     int front = 0, rear = 0;
     queue[rear++] = *root;
     NodeHeap* lastNodeHeap = NULL;
+
+    // Find the last node
     while (front < rear) {
         lastNodeHeap = queue[front++];
         if (lastNodeHeap->left) queue[rear++] = lastNodeHeap->left;
         if (lastNodeHeap->right) queue[rear++] = lastNodeHeap->right;
     }
+
     if (lastNodeHeap) {
+        // Move the last node's data to the root
+        (*root)->code = lastNodeHeap->code;
         (*root)->priority = lastNodeHeap->priority;
+
+        // Remove the last node
         front = 0;
         rear = 0;
         queue[rear++] = *root;
@@ -133,20 +139,21 @@ int extractMax(NodeHeap** root)
             }
         }
     }
+    // Restore the heap property
     maxHeapify(*root);
-    return maxpriority;
+    return maxPriority; // Return the priority (or return maxCode if needed)
 }
 
 NodeHeap *findAndRemoveByPriority(NodeHeap* root, int priority)
 {
     if (root == NULL) {
-        printf("The heap is empty or the NodeHeap does not exist.\n");
+        printf("The heap is empty or the Node does not exist.\n");
         return NULL;
     }
 
     // If the root has the matching priority
     if (root->priority == priority) {
-        extractMax(&root);  // Reuse extractMax to handle the removal and restructuring
+        extractMax(&root);  // This now handles both code and priority properly
         return root;
     }
 
@@ -162,9 +169,7 @@ NodeHeap *findAndRemoveByPriority(NodeHeap* root, int priority)
         if (current->left) {
             if (current->left->priority == priority) {
                 NodeHeap* temp = current->left;
-
-                // Replace the NodeHeap to be removed with the last NodeHeap
-                extractMax(&temp);  // Reuse extractMax to remove and restore the heap
+                extractMax(&temp);  // This removes the node correctly
                 current->left = NULL;
                 return root;
             } else {
@@ -176,9 +181,7 @@ NodeHeap *findAndRemoveByPriority(NodeHeap* root, int priority)
         if (current->right) {
             if (current->right->priority == priority) {
                 NodeHeap* temp = current->right;
-
-                // Replace the NodeHeap to be removed with the last NodeHeap
-                extractMax(&temp);  // Reuse extractMax to remove and restore the heap
+                extractMax(&temp);  // This removes the node correctly
                 current->right = NULL;
                 return root;
             } else {

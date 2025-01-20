@@ -13,7 +13,7 @@ int main()
 
     char line_file[100], line_name[20];
     int room_code, room_capacity, room_priority, new_priority;
-    
+
     if (file == NULL)
     {
         perror("Error opening file.\n");
@@ -43,12 +43,17 @@ int main()
                                                                    // **Joga na hash como 'disponivel' 
         } else if (strcmp(line_name, "CANCELAR_RESERVA") == 0) {
             sscanf(line_file, "%*s %d", &room_code);
+            
             room_priority = findPriorityByCode(root_heap, room_code);
+            printf("A prioridade da sala %d eh %d\n", room_code, room_priority);
+
             findAndRemoveByPriority(root_heap, room_priority);     // Removendo a reserva
+            puts("agora temos as reservas:");
+            printInOrder(root_heap);
             
         } else if (strcmp(line_name, "LISTAR_SALAS") == 0){
-            puts("Printing the rooms:");                        // Listando as salas (AVL)
-            showAVLTree(root_avl, 0);
+            //puts("Printing the rooms:");                        // Listando as salas (AVL)
+            //showAVLTree(root_avl, 0);
                                                                     // **Joga na hash como 'disponivel'  
 
         } else if (strcmp(line_name, "CONSULTAR_SALA") == 0){
@@ -65,8 +70,6 @@ int main()
         } else {
             perror("Problem reading the line...");
         }
-        puts("RESERVAS");
-        printInOrder(root_heap);
     }
     // Closing the file
     fclose(file);
