@@ -182,11 +182,16 @@ NodeAVL *searchNodeAVL(NodeAVL *root, unsigned int code) {
 }
 
 
-void showAVLTree(NodeAVL *root) {
+void showAVLTree(NodeAVL *root, const unsigned int level) {
     if (root) {
-        showAVLTree(root->left);
-        printf("%d ", root->code);
-        showAVLTree(root->right);
+        showAVLTree(root->right, level + 1);
+        printf("\n\n");
+
+        for (int  i = 0; i < level; i++)
+            printf("\t");
+        
+        printf("%d", root->code);
+        showAVLTree(root->left, level + 1);
     }
 }
 
