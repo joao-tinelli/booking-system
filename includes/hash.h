@@ -3,7 +3,10 @@
 
 typedef struct _node NodeHash;
 
-typedef struct _listhash ListHash;
+typedef struct _listhash {
+    NodeHash *start;
+    unsigned int tam;
+} ListHash;
 
 /**
  * @brief Function to initialize the list of each element in the hash table.
@@ -17,14 +20,14 @@ void initializeList(ListHash *list);
  * @param *list, code, *status
  * @return (void)
  */
-void insertIntoList(ListHash *list, unsigned int code, char *status);
+void insertIntoList(ListHash *list, unsigned int code, const char *status);
 
 /**
  * @brief Function to update the status of a room within a list of a specific position in the hash table.
  * @param *list, code, *newStatus
  * @return (void)
  */
-void updateRoomStatus(ListHash *list, unsigned int code, char *newStatus);
+void updateRoomStatus(ListHash *list, unsigned int code, const char *newStatus);
 
 /**
  * @brief Function to search for the status of a room within a list of a specific position in the hash table.
@@ -59,14 +62,14 @@ int hashFunction(unsigned int code, unsigned int size);
  * @param t[], code, *status, size
  * @return (void)
  */
-void insertIntoHashTable(ListHash *t, unsigned int code, char *status, unsigned int size);
+void insertIntoHashTable(ListHash *t, unsigned int code, const char *status, unsigned int size);
 
 /**
  * @brief Function to update the status of a room in the hash table.
  * @param t[], code, *newStatus, size
  * @return (void)
  */
-void updateStatusIntoHashTable(ListHash *t, unsigned int code, char *newStatus, unsigned int size);
+void updateStatusIntoHashTable(ListHash *t, unsigned int code, const char *newStatus, unsigned int size);
 
 /**
  * @brief Function to search for the status of a room within the hash table.
@@ -81,5 +84,9 @@ char *searchStatusIntoHashTable(ListHash *t, unsigned int code, unsigned int siz
  * @return (void)
  */
 void printHashTable(ListHash *t, const unsigned int size);
+
+void freeList(ListHash *list);
+
+void freeHashTable(ListHash *t, unsigned int size);
 
 #endif

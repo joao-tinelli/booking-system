@@ -18,6 +18,7 @@ libed: \
 	$(OBJ)/avl.o \
 	$(OBJ)/hash.o \
 	$(OBJ)/heap.o \
+	$(OBJ)/log.o \
 
 
 app: clean_apps \

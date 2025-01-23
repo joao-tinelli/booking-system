@@ -89,9 +89,9 @@ NodeAVL *searchNodeAVL(NodeAVL *root, unsigned int code);
 
 /**
  * @brief Function to display the AVL tree (rooms)
- * @param *root
+ * @param *root, level
  * @return void
  */
-void showAVLTree(NodeAVL *root);
+void showAVLTree(NodeAVL *root, const unsigned int level);
 
 #endif
