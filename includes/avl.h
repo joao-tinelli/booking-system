@@ -94,4 +94,11 @@ NodeAVL *searchNodeAVL(NodeAVL *root, unsigned int code);
  */
 void showAVLTree(NodeAVL *root, const unsigned int level);
 
+/**
+ * @brief Function to deallocate the tree
+ * @param *root
+ * @return void
+ */
+void freeAVLTree(NodeAVL *root);
+
 #endif

@@ -230,7 +230,10 @@ int findPriorityByCode(NodeHeap *root, int code) {
     return -1; // Return an invalid priority if the node is not found
 }
 
-
-
-
-
+void freeHeap(NodeHeap *root) {
+    if (root != NULL) {
+        freeHeap(root->left);
+        freeHeap(root->right);
+        free(root);
+    }
+}

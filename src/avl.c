@@ -195,3 +195,10 @@ void showAVLTree(NodeAVL *root, const unsigned int level) {
     }
 }
 
+void freeAVLTree(NodeAVL *root) {
+    if (root != NULL) {
+        freeAVLTree(root->left);
+        freeAVLTree(root->right);
+        free(root);
+    }
+}

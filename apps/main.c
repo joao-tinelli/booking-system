@@ -121,5 +121,9 @@ int main()
     puts("HEAP (Reservations):");
     printInOrder(root_heap);
 
+    freeAVLTree(root_avl);
+    freeHashTable(hashTable, TAM_HASH_TABLE);
+    freeHeap(root_heap);
+
     return 0;
 }

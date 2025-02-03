@@ -66,4 +66,11 @@ void printInOrder(NodeHeap* root);
  */
 int findPriorityByCode(NodeHeap *root, int code);
 
+/**
+ * @brief Function to deallocate
+ * @param *root
+ * @return
+ */
+void freeHeap(NodeHeap *root);
+
 #endif
